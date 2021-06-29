@@ -3,17 +3,16 @@ name: Release version
 on:
   workflow_dispatch:
     inputs:
-      environment:
-        description: 'env [staging/prod]'
+      release_type:
+        description: 'release type'
         required: true
         default: 'staging'
-      branch:
-        description: 'branch'
-        required: true
-        default: 'master'
       version:
-        description: 'tag'
+        description: 'version'
         required: true
+      num:
+        description: 'release candidate num'
+        required: false
 
 jobs:
 
@@ -23,7 +22,7 @@ jobs:
 
     steps:
       - name: create tag from env value
-        run: echo '::set-output name=TAG::${scripts/tag_name.sh ${{ github.event.inputs.version }}}'
+        run: echo '::set-output name=TAG::${scripts/tag_name.sh ${{ github.event.inputs.release_type }} ${{ github.event.inputs.version }} ${{ github.event.inputs.num }}}'
         id: tag-name
 
       - name: Create tag
