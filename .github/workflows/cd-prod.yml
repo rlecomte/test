@@ -1,0 +1,27 @@
+name: CD prod
+
+on:
+  push:
+    tags:
+      - "[0-9]+.[0-9]+.[0-9]+"
+
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'tag'
+        required: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      RELEASE_TAG: ${GITHUB_REF##*/}
+
+    steps:
+      - name: "deploy fresh release"
+        if: ${{ env.GITHUB_REF }}
+        run: echo Deploy version ${{ GITHUB_REF }} in production!
+
+      - name: "deploy tag"
+        if: ${{ github.event.inputs.tag }}
+        run: echo Deploy version ${{ github.event.inputs.tag }} in production!
