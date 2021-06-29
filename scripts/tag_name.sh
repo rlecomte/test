@@ -9,12 +9,13 @@ if [[ ! $VERSION =~ ^([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
   exit 1
 fi
 
-if [[ ! NUM =~ ^([0-9]+)$ ]]; then
-  echo "Something is wrong with release candidate number."
-  exit 1
-fi
-
 if [[ "$RELEASE_TYPE" = "staging" ]]; then
+
+  if [[ ! $NUM =~ ^([0-9]+)$ ]]; then
+    echo "Something is wrong with release candidate number."
+    exit 1
+  fi
+
   echo "$VERSION-rc.$NUM"
 elif [[ "$RELEASE_TYPE" = "prod" ]]; then
   echo "$VERSION"
