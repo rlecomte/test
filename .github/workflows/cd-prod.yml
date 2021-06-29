@@ -20,7 +20,7 @@ jobs:
     steps:
       - name: "deploy fresh release"
         if: ${{ env.GITHUB_REF }}
-        run: echo Deploy version ${{ GITHUB_REF }} in production!
+        run: echo Deploy version ${{ env.GITHUB_REF }} in production!
 
       - name: "deploy tag"
         if: ${{ github.event.inputs.tag }}
