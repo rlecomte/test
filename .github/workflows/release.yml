@@ -25,7 +25,7 @@ jobs:
         uses: actions/checkout@master
         
       - name: create tag from env value
-        run: echo "::set-output name=TAG::${scripts/tag_name.sh ${{ github.event.inputs.release_type }} ${{ github.event.inputs.version }} ${{ github.event.inputs.num }}}"
+        run: echo "::set-output name=TAG::$(scripts/tag_name.sh ${{ github.event.inputs.release_type }} ${{ github.event.inputs.version }} ${{ github.event.inputs.num }})"
         id: tag-name
 
       - name: Create tag
