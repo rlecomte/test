@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 err(){
-    echo "E: $*" >>/dev/stderr
+    echo "error: $*" >>/dev/stderr
 }
 
 RELEASE_TYPE=$1
