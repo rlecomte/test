@@ -1,22 +1,36 @@
-name: CD Prod
+name: Release version
+
 on: 
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Define env name'     
+        description: 'env [staging/prod]'     
         required: true
-        default: 'prod'
+        default: 'staging'
       branch:
-        description: 'Define branch name'     
+        description: 'branch'     
         required: true
         default: 'master'
+      version:
+        description: 'tag'     
+        required: true
 
-jobs:    
-  printInputs:
+jobs:
+
+  release:
+  
     runs-on: ubuntu-latest
-    steps:        
-    - run: echo "::set-env name=INPUT_ALLOWED_FEATURES::${{ github.event.inputs.environment }}" 
-      shell: bash 
-    - run: |
-        echo "Env: ${{ github.event.inputs.environment }}"
-        echo "Branch: ${{ github.event.inputs.branch }}"
+    
+    steps:
+    
+      - name: Create tag
+        uses: actions/github-script@v4
+        with:
+          github-token: ${{ github.token }}
+          script: |
+            github.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: "refs/tags/${{ github.event.inputs.version }}",
+              sha: context.sha
+            })
