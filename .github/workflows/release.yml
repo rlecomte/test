@@ -1,28 +1,31 @@
 name: Release version
 
-on: 
+on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'env [staging/prod]'     
+        description: 'env [staging/prod]'
         required: true
         default: 'staging'
       branch:
-        description: 'branch'     
+        description: 'branch'
         required: true
         default: 'master'
       version:
-        description: 'tag'     
+        description: 'tag'
         required: true
 
 jobs:
 
   release:
-  
+
     runs-on: ubuntu-latest
-    
+
     steps:
-    
+      - name: create tag from env value
+        run: echo '::set-output name=TAG::${scripts/tag_name.sh ${{ github.event.inputs.version }}}'
+        id: tag-name
+
       - name: Create tag
         uses: actions/github-script@v4
         with:
@@ -31,6 +34,6 @@ jobs:
             github.git.createRef({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              ref: "refs/tags/${{ github.event.inputs.version }}",
+              ref: "refs/tags/${{ step.tag-name.outputs.TAG }}",
               sha: context.sha
             })
