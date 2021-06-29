@@ -14,7 +14,9 @@ on:
 jobs:    
   printInputs:
     runs-on: ubuntu-latest
-    steps:
+    steps:        
+    - run: echo "::set-env name=INPUT_ALLOWED_FEATURES::${{ github.event.inputs.environment }}" 
+      shell: bash 
     - run: |
         echo "Env: ${{ github.event.inputs.environment }}"
         echo "Branch: ${{ github.event.inputs.branch }}"
