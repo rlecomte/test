@@ -1,9 +1,14 @@
 name: CD prod
 
 on:
-  create:
-      tags:
-        - '*'
+  push:
+    tags:
+      - '*'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'tag'
+        required: true
 
 jobs:
   build:
