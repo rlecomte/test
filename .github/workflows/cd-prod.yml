@@ -1,9 +1,6 @@
 name: CD prod
 
-on:
-  release:
-    types: [released]
-    
+on:   
   workflow_dispatch:
     inputs:
       tag:
@@ -13,9 +10,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      RELEASE_TAG: ${GITHUB_REF##*/}
 
     steps:
       - name: "deploy fresh release"
-        run: echo Deploy version ${{ github.event.release.name }} in production!
+        run: echo Deploy version ${{ github.event.inputs.tag }} in production!
