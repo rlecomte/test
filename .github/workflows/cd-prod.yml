@@ -1,11 +1,8 @@
 name: CD prod
 
 on:
-  workflow_run:
-    workflows: ["Release version"]
-    branches: [main]
-    types: 
-      - completed
+  release:
+    types: [published]
   workflow_dispatch:
     inputs:
       tag:
@@ -20,4 +17,4 @@ jobs:
 
     steps:
       - name: "deploy fresh release"
-        run: echo Deploy version ${{ github.event.workflow_run.outputs }} in production!
+        run: echo Deploy version ${{ github.event.release.name }} in production!
