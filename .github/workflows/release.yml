@@ -36,4 +36,4 @@ jobs:
         with:
           workflow: CD prod
           token: ${{ secrets.PERSONAL_TOKEN }}
-          inputs: '{ "tag": "steps.bump.outputs.tag" }'
+          inputs: '{ "tag": "${{ steps.bump.outputs.tag }}" }'
