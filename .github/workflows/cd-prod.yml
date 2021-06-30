@@ -1,7 +1,7 @@
 name: CD prod
 
 on:
-  create:
+  push:
     tags:
       - '*'
 
