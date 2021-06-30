@@ -1,9 +1,9 @@
 name: CD prod
 
 on:
-  push:
-    tags:
-      - '*'
+  create:
+      tags:
+        - '*'
 
 jobs:
   build:
