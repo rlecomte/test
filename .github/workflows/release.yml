@@ -30,3 +30,10 @@ jobs:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: ${{ steps.bump.outputs.tag }}
           prerelease: false
+          
+      - name: Invoke CD
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: CD prod
+          token: ${{ secrets.PERSONAL_TOKEN }}
+          inputs: '{ "tag": "steps.bump.outputs.tag" }'
