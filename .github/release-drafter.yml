@@ -18,6 +18,10 @@ categories:
    label: 'enhancement'
  - title: 'Bug Fixes'
    label: 'bug'
+ 
+exclude-labels:
+ - '[SKIP CHANGELOG]'
+ - '[skip changelog]'
 
 template: |
   # What's Changed
