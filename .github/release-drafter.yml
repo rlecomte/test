@@ -20,8 +20,8 @@ categories:
    label: 'bug'
  
 exclude-labels:
- - '[SKIP CHANGELOG]'
- - '[skip changelog]'
+ - '\[SKIP CHANGELOG\]'
+ - '\[skip changelog\]'
 
 template: |
   # What's Changed
