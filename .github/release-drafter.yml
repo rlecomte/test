@@ -18,10 +18,20 @@ categories:
    label: 'enhancement'
  - title: 'Bug Fixes'
    label: 'bug'
- 
+   
 exclude-labels:
- - '\[SKIP CHANGELOG\]'
- - '\[skip changelog\]'
+ - 'skip'
+ 
+autolabeler:
+  - label: 'bug'
+    title:
+      - 'fix : *'
+  - label: 'enhancement'
+    title:
+      - 'feat : *'
+  - label: 'skip'
+    title:
+      - 'skip : *'
 
 template: |
   # What's Changed
