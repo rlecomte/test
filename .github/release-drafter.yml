@@ -35,10 +35,10 @@ autolabeler:
       
 replacers:
   - search: '/\[feat\]/g'
-    replace: 'toutafé'
-  - search: '.*(\[feat\]).*'
     replace: ''
-  - search: '.*(\[skip\]).*'
+  - search: '/\[fix\]/g'
+    replace: ''
+  - search: '/\[skip\]/g'
     replace: ''
 
 template: |
