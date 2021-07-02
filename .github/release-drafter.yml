@@ -34,7 +34,7 @@ autolabeler:
       - '.*\[skip\].*'
       
 replacers:
-  - search: '.*'
+  - search: '/*/g'
     replace: 'toutafé'
   - search: '.*(\[feat\]).*'
     replace: ''
