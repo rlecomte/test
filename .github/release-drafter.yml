@@ -25,13 +25,21 @@ exclude-labels:
 autolabeler:
   - label: 'bug'
     title:
-      - 'fix : *'
+      - '.*(\[fix\])'
   - label: 'enhancement'
     title:
-      - 'feat : *'
+      - '.*(\[feat\])'
   - label: 'skip'
     title:
-      - 'skip : *'
+      - '.*(\[fix\])'
+      
+replacers:
+  - search: '.*(\[fix\])'
+    replace: ''
+  - search: '.*(\[feat\])'
+    replace: ''
+  - search: '.*(\[skip\])'
+    replace: ''
 
 template: |
   # What's Changed
