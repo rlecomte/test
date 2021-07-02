@@ -28,7 +28,7 @@ autolabeler:
       - '.*\[fix\].*'
   - label: 'enhancement'
     title:
-      - '.*feat.*'
+      - '/.*\[feat\].*/'
   - label: 'skip'
     title:
       - '.*\[skip\].*'
