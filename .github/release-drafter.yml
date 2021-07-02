@@ -25,13 +25,22 @@ exclude-labels:
 autolabeler:
   - label: 'bug'
     title:
-      - '.*\[fix\].*'
+      - '/.*\[fix\].*/'
+  - label: 'patch'
+    title:
+      - '/.*\[fix\].*/'
   - label: 'enhancement'
+    title:
+      - '/.*\[feat\].*/'
+  - label: 'minor'
     title:
       - '/.*\[feat\].*/'
   - label: 'skip'
     title:
-      - '.*\[skip\].*'
+      - '/.*\[skip\].*/'
+  - label: 'major'
+    title:
+      - '/.*\[breaking\].*/'
       
 replacers:
   - search: '/\[feat\]/g'
@@ -39,6 +48,8 @@ replacers:
   - search: '/\[fix\]/g'
     replace: ''
   - search: '/\[skip\]/g'
+    replace: ''  
+  - search: '/\[breaking\]/g'
     replace: ''
 
 template: |
