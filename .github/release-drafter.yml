@@ -15,11 +15,9 @@ version-resolver:
   
 categories:
  - title: 'Features'
-    labels:
-      - 'feature'
-  - title: 'Bug Fixes'
-    labels:
-      - 'bug'
+   label: 'enhancement'
+ - title: 'Bug Fixes'
+   label: 'bug'
 
 template: |
   # What's Changed
