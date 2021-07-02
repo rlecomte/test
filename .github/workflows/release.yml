@@ -1,39 +1,29 @@
-name: Release version
+name: Release Drafter
 
 on:
-  workflow_dispatch:
-    inputs:
-      bump:
-        description: 'bump'
-        required: true
-        default: 'minor'
+  push:
+    # branches to consider in the event; optional, defaults to all
+    branches:
+      - master
+  # pull_request event is required only for autolabeler
+  pull_request:
+    # Only following types are handled by the action, but one can default to all as well
+    types: [opened, reopened, synchronize]
 
 jobs:
-  
-  bump:
+  update_release_draft:
     runs-on: ubuntu-latest
-  
     steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: '0'
-      - name: Bump version and push tag
-        id: bump
-        uses: anothrNick/github-tag-action@cfd2c75d0bf1071c5355d577f0018b0e1b515e9c
+      # (Optional) GitHub Enterprise requires GHE_HOST variable set
+      #- name: Set GHE_HOST
+      #  run: |
+      #    echo "GHE_HOST=${GITHUB_SERVER_URL##https:\/\/}" >> $GITHUB_ENV
+
+      # Drafts your next Release notes as Pull Requests are merged into "master"
+      - uses: release-drafter/release-drafter@v5
+        # (Optional) specify config name to use, relative to .github/. Default: release-drafter.yml
+        # with:
+        #   config-name: my-config.yml
+        #   disable-autolabeler: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DEFAULT_BUMP: ${{ github.event.inputs.bump }}
-          RELEASE_BRANCHES: main
-          
-      - uses: "marvinpinto/action-automatic-releases@919008cf3f741b179569b7a6fb4d8860689ab7f0"
-        with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: ${{ steps.bump.outputs.tag }}
-          prerelease: false
-          
-      - name: Invoke CD
-        uses: benc-uk/workflow-dispatch@4c044c1613fabbe5250deadc65452d54c4ad4fc7
-        with:
-          workflow: CD prod
-          token: ${{ secrets.PERSONAL_TOKEN }}
-          inputs: '{ "tag": "${{ steps.bump.outputs.tag }}" }'
