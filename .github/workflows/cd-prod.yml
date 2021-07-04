@@ -1,6 +1,6 @@
 name: CD prod
 
-on:   
+on:
   workflow_dispatch:
     inputs:
       tag:
@@ -12,5 +12,5 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: "deploy fresh release"
-        run: echo Deploy version ${{ github.event.inputs.tag }} in production!
+      - name: "deploy release"
+        run: echo Deploy version ${{ github.event.release }} ${{ github.event.inputs.tag }} in production!
