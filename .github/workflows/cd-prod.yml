@@ -16,4 +16,4 @@ jobs:
 
     steps:
       - name: "deploy release"
-        run: echo Deploy version ${{ github.event.type }} ${{ github.event.inputs.tag }} in production!
+        run: echo Deploy version ${{ github.event.release }} ${{ github.event.inputs.tag }} in production!
