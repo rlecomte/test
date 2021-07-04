@@ -1,6 +1,9 @@
 name: CD prod
 
 on:
+  release:
+    types: [published]
+
   workflow_dispatch:
     inputs:
       tag:
@@ -13,6 +16,7 @@ jobs:
 
     steps:
       - name: "deploy release"
+
         if: ${{ github.event.release }}
         run: echo Deploy version ${{ github.event.release.tag_name }} in production!
 
