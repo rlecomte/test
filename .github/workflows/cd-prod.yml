@@ -14,9 +14,15 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     
-    env:
-      REALEASE_TAG: ${{ github.event.release.tag_name || github.event.inputs.tag }}
-
-    steps:
+    steps:              
+      - name: "set env"
+        if: ${{ github.event.release }}
+        run: echo ::set-env name=RELEASE_TAG::${{ github.event.release.tag_name }}
+        
+      - name: "set env"
+        if: ${{ github.event.inputs.tag }}
+        run: echo ::set-env name=RELEASE_TAG::${{ github.event.inputs.tag }}
+        
       - name: "deploy release"
         run: echo Deploy version ${{ RELEASE_TAG }} in production!
+
