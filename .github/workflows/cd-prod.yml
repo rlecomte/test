@@ -19,4 +19,4 @@ jobs:
 
     steps:
       - name: "deploy release"
-        run: echo Deploy version ${{ REALEASE_TAG }} in production!
+        run: echo Deploy version ${{ RELEASE_TAG }} in production!
