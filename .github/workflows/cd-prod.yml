@@ -13,13 +13,10 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    
+    env:
+      REALEASE_TAG: ${{ github.event.release.tag_name || github.event.inputs.tag }}
 
     steps:
       - name: "deploy release"
-
-        if: ${{ github.event.release }}
-        run: echo Deploy version ${{ github.event.release.tag_name }} in production!
-
-      - name: "deploy release"
-        if: ${{ github.event.inputs.tag }}
-        run: echo Deploy version ${{ github.event.inputs.tag }} in production!
+        run: echo Deploy version ${{ REALEASE_TAG }} in production!
