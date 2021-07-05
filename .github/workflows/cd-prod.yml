@@ -14,6 +14,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     
+    env:
+      RELEASE_TAG: ''
+    
     steps:              
       - name: "set env"
         if: ${{ github.event.release }}
